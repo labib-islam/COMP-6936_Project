@@ -1,6 +1,6 @@
 # Builds data/manifest.csv with one row per image in the classification task.
 # Run from the project root:
-#   uv run python code/1-preprocessing/build_manifest.py
+#   uv run python -m src.preprocessing.build_manifest
 
 from pathlib import Path
 
@@ -51,4 +51,3 @@ df.to_csv(out_file, index=False)
 print(f"Saved {len(df)} rows to {out_file}")
 print("--------")
 print(df.groupby(["orig_split", "label"]).size().unstack())
-print("--------")

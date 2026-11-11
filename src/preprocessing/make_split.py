@@ -1,7 +1,7 @@
 # Splits the original train set into train and val, and saves data/splits.csv.
 # The test set is kept as it is.
 # Run from the project root:
-#   uv run python code/1-preprocessing/make_split.py
+#   uv run python -m src.preprocessing.make_split
 
 from pathlib import Path
 
@@ -17,7 +17,6 @@ seed = 42
 df = pd.read_csv(manifest_file)
 
 train_df = df[df["orig_split"] == "train"]
-test_df = df[df["orig_split"] == "test"]
 
 # stratify on class and plane together ("glioma_ax")
 strat = train_df["label"] + "_" + train_df["plane"]
