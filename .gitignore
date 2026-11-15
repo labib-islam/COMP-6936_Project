@@ -6,3 +6,6 @@ __pycache__/
 
 .DS_Store
 temp/
+
+runs/**/*.pt
+runs_test/
