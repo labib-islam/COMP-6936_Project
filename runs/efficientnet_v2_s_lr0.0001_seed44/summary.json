@@ -1,0 +1,27 @@
+{
+  "model": "efficientnet_v2_s",
+  "lr": 0.0001,
+  "seed": 44,
+  "best_val_f1": 0.9959369181907787,
+  "best_epoch": 14,
+  "epochs_run": 18,
+  "total_minutes": 26.169096076488493,
+  "peak_memory_mb": 3980.392448,
+  "device": "cuda",
+  "torch_version": "2.14.1+cu130",
+  "settings": {
+    "model": "efficientnet_v2_s",
+    "lr": 0.0001,
+    "seed": 44,
+    "out": "/content/drive/MyDrive/COMP6936 - Advanced Machine Learning/runs",
+    "head_epochs": 3,
+    "head_lr": 0.001,
+    "epochs": 15,
+    "patience": 5,
+    "batch_size": 16,
+    "weight_decay": 0.01,
+    "workers": 2,
+    "limit": 0,
+    "amp": true
+  }
+}

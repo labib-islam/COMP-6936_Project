@@ -1,0 +1,27 @@
+{
+  "model": "convnext_tiny",
+  "lr": 0.0001,
+  "seed": 42,
+  "best_val_f1": 0.998798194698223,
+  "best_epoch": 11,
+  "epochs_run": 16,
+  "total_minutes": 21.075234230359396,
+  "peak_memory_mb": 3375.2832,
+  "device": "cuda",
+  "torch_version": "2.14.1+cu130",
+  "settings": {
+    "model": "convnext_tiny",
+    "lr": 0.0001,
+    "seed": 42,
+    "out": "/content/drive/MyDrive/COMP6936 - Advanced Machine Learning/runs",
+    "head_epochs": 3,
+    "head_lr": 0.001,
+    "epochs": 15,
+    "patience": 5,
+    "batch_size": 16,
+    "weight_decay": 0.01,
+    "workers": 2,
+    "limit": 0,
+    "amp": true
+  }
+}

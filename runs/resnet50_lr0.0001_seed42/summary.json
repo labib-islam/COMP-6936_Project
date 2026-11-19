@@ -1,0 +1,27 @@
+{
+  "model": "resnet50",
+  "lr": 0.0001,
+  "seed": 42,
+  "best_val_f1": 0.9973928200137252,
+  "best_epoch": 15,
+  "epochs_run": 18,
+  "total_minutes": 22.40469229221344,
+  "peak_memory_mb": 2499.11808,
+  "device": "cuda",
+  "torch_version": "2.14.1+cu130",
+  "settings": {
+    "model": "resnet50",
+    "lr": 0.0001,
+    "seed": 42,
+    "out": "/content/drive/MyDrive/COMP6936 - Advanced Machine Learning/runs",
+    "head_epochs": 3,
+    "head_lr": 0.001,
+    "epochs": 15,
+    "patience": 5,
+    "batch_size": 16,
+    "weight_decay": 0.01,
+    "workers": 2,
+    "limit": 0,
+    "amp": true
+  }
+}
