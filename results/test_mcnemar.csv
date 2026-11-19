@@ -1,0 +1,7 @@
+model_a,model_b,only_a_right,only_b_right,p,p_holm,significant
+densenet121,convnext_tiny,7,2,0.1796875,1.0,False
+densenet121,resnet50,3,2,1.0,1.0,False
+densenet121,efficientnet_v2_s,4,2,0.6875,1.0,False
+convnext_tiny,resnet50,1,5,0.21875,1.0,False
+convnext_tiny,efficientnet_v2_s,3,6,0.5078125,1.0,False
+resnet50,efficientnet_v2_s,4,3,1.0,1.0,False
