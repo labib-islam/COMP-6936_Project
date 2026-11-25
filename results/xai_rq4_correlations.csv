@@ -1,0 +1,7 @@
+level,metric,n,spearman,p
+"12 runs, Grad-CAM",pointing,12,-0.11188811188811189,0.729194990751066
+"12 runs, Grad-CAM",energy,12,-0.5524475524475525,0.06251148327961524
+"4 models, Grad-CAM",pointing,4,0.39999999999999997,0.6
+"4 models, Grad-CAM",energy,4,-0.7999999999999999,0.2000000000000001
+"4 models, IG (rep. seed)",pointing,4,-0.39999999999999997,0.6
+"4 models, IG (rep. seed)",energy,4,-0.19999999999999998,0.8
