@@ -59,7 +59,10 @@ def gradcam(model, target_layer, image, target_class):
 
     handle = target_layer.register_forward_hook(forward_hook)
     try:
-        output = model(image.unsqueeze(0))
+        # the input needs gradients so the backward pass reaches the target layer,
+        # even when the model's own weights are frozen
+        x = image.unsqueeze(0).clone().requires_grad_(True)
+        output = model(x)
         model.zero_grad()
         output[0, target_class].backward()   # gradient of the class score (logit)
     finally:
@@ -96,23 +99,29 @@ def blurred_baseline(image, sigma=20):
 
 
 def integrated_gradients(model, image, baseline, target_class, steps=50, batch_size=10):
-    # Walks from the baseline to the image in small steps, averages the gradients along
-    # the way, and multiplies by (image - baseline).
+    # Walks from the baseline to the image, averages the gradients along the way,
+    # and multiplies by (image - baseline).
+    # The points on the path and their weights come from Gauss-Legendre quadrature, which
+    # gives a much more accurate average than equal steps for the same number of steps
+    # (it is also Captum's default).
     # Returns the attributions [3, H, W] and the convergence delta: how far the sum of the
     # attributions is from the real change in the class score (should be close to 0).
     image = image.detach()
     baseline = baseline.to(image.device)
-    alphas = (torch.arange(steps, device=image.device, dtype=torch.float32) + 0.5) / steps
+    nodes, weights = np.polynomial.legendre.leggauss(steps)   # points and weights on [-1, 1]
+    alphas = torch.tensor((nodes + 1) / 2, dtype=torch.float32, device=image.device)   # moved to [0, 1]
+    weights = torch.tensor(weights / 2, dtype=torch.float32, device=image.device)      # they sum to 1
     total_gradient = torch.zeros_like(image)
 
     for start in range(0, steps, batch_size):
         a = alphas[start:start + batch_size].view(-1, 1, 1, 1)
+        w = weights[start:start + batch_size].view(-1, 1, 1, 1)
         points = (baseline + a * (image - baseline)).requires_grad_(True)
         scores = model(points)[:, target_class]
         gradients, = torch.autograd.grad(scores.sum(), points)
-        total_gradient += gradients.sum(dim=0)
+        total_gradient += (gradients * w).sum(dim=0)   # weighted average of the gradients
 
-    attributions = (image - baseline) * total_gradient / steps
+    attributions = (image - baseline) * total_gradient
 
     with torch.no_grad():
         scores = model(torch.stack([image, baseline]))[:, target_class]

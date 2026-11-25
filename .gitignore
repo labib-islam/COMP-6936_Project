@@ -9,3 +9,4 @@ temp/
 
 runs/**/*.pt
 runs_test/
+results/xai/*/maps/
